@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sagres Automação Comercial | Londrina – PR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070b14; --bg2: #0c1220; --card: #101828; --card2: #0f1a2e;
+      --accent: #1a6fe8; --accent2: #45aaff; --teal: #4ecdc4;
+      --text: #e8edf8; --muted: #6b7a99;
+      --border: rgba(255,255,255,0.06);
+      --grad: linear-gradient(135deg, #1a6fe8 0%, #45aaff 100%);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 3rem; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(7,11,20,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Manrope', sans-serif; font-weight: 900; font-size: 1.3rem;
+      letter-spacing: -0.05em; display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo img {
+      width: 32px; height: 32px; border-radius: 8px; object-fit: cover;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; background: var(--grad); border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.6)} }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500; color: var(--muted);
+      text-decoration: none; transition: color .2s; position: relative;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:1px; background: var(--accent2); transition: width .25s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-phone { color: var(--teal) !important; font-weight: 600 !important; }
+    .nav-phone::after { display: none !important; }
+    .nav-cta {
+      background: var(--grad); color: #fff !important; padding: 8px 20px;
+      border-radius: 8px; font-weight: 600 !important; font-size: 0.85rem !important;
+      box-shadow: 0 4px 20px rgba(26,111,232,0.35);
+      transition: transform .2s, opacity .2s !important;
+    }
+    .nav-cta:hover { transform: translateY(-1px); opacity: 0.9; }
+    .nav-cta::after { display: none !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; padding: 100px 3rem 5rem;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem;
+      align-items: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; right: -10%; width: 55%; height: 100%;
+      background: var(--card2); clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); z-index: 0;
+    }
+    .hero::after {
+      content: ''; position: absolute; top: 15%; left: 35%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(26,111,232,0.18) 0%, transparent 65%);
+      pointer-events: none; z-index: 0; animation: breathe 6s ease-in-out infinite;
+    }
+    @keyframes breathe { 0%,100%{transform:scale(1);opacity:0.8} 50%{transform:scale(1.2);opacity:1} }
+    .hero-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(26,111,232,0.12); pointer-events: none; z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent2); margin-bottom: 1.8rem;
+    }
+    .hero-eyebrow::before { content:''; width:28px; height:2px; background: var(--grad); border-radius:2px; }
+    .hero h1 {
+      font-family: 'Manrope', sans-serif; font-weight: 900;
+      font-size: clamp(2.8rem, 5vw, 4.8rem); line-height: 1.0;
+      letter-spacing: -0.05em; margin-bottom: 1.6rem;
+    }
+    .hero h1 em { font-style:normal; background: var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero h1 .outline { font-style:normal; color: var(--text); }
+    .hero-desc { font-size: 1.05rem; line-height: 1.75; color: var(--muted); max-width: 460px; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .btn-primary {
+      background: var(--grad); color: #fff; padding: 14px 32px; border-radius: 10px;
+      font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 8px 32px rgba(26,111,232,0.4); transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(26,111,232,0.55); }
+    .arrow { transition: transform .2s; }
+    .btn-primary:hover .arrow { transform: translateX(4px); }
+    .btn-ghost {
+      background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.12);
+      padding: 14px 32px; border-radius: 10px;
+      font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: border-color .2s, background .2s, transform .2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent2); background: rgba(26,111,232,0.06); transform: translateY(-2px); }
+    .hero-trust { display: flex; align-items: center; gap: 1.2rem; }
+    .trust-avs { display: flex; }
+    .trust-av {
+      width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--bg);
+      background: var(--grad); display: grid; place-items: center;
+      font-size: 0.75rem; font-weight: 700; margin-left: -10px;
+    }
+    .trust-av:first-child { margin-left: 0; }
+    .trust-text { font-size: 0.82rem; color: var(--muted); }
+    .trust-text strong { color: var(--text); }
+    .hero-right { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1rem; }
+    .hero-main-card {
+      background: linear-gradient(135deg, #111e38, #0d1829);
+      border: 1px solid rgba(26,111,232,0.25); border-radius: 20px; padding: 2rem;
+      position: relative; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .hero-main-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px; background: var(--grad);
+    }
+    .card-lbl { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem; }
+    .big-num {
+      font-family: 'Manrope', sans-serif; font-size: 4.5rem; font-weight: 900;
+      letter-spacing: -0.06em; background: var(--grad);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      line-height: 1; margin-bottom: .3rem;
+    }
+    .big-desc { font-size: 0.9rem; color: var(--muted); }
+    .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .mini-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.2rem 1.4rem; transition: border-color .25s, transform .25s;
+    }
+    .mini-card:hover { border-color: rgba(26,111,232,0.3); transform: translateY(-2px); }
+    .mini-val { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; }
+    .mini-val.blue { color: var(--accent2); }
+    .mini-val.teal { color: var(--teal); }
+    .mini-lbl { font-size: 0.75rem; color: var(--muted); }
+    .support-badge {
+      background: linear-gradient(135deg, #0f2040, #1a3060);
+      border: 1px solid rgba(78,205,196,0.25); border-radius: 14px;
+      padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .support-ico {
+      width: 44px; height: 44px; background: rgba(78,205,196,0.12);
+      border-radius: 12px; display: grid; place-items: center; font-size: 1.3rem; flex-shrink: 0;
+    }
+    .support-badge h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
+    .support-badge p { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    .hero-eyebrow { animation: fadeUp .6s .1s both; }
+    .hero h1 { animation: fadeUp .6s .2s both; }
+    .hero-desc { animation: fadeUp .6s .3s both; }
+    .hero-btns { animation: fadeUp .6s .4s both; }
+    .hero-trust { animation: fadeUp .6s .5s both; }
+    .hero-right { animation: fadeUp .7s .4s both; }
+
+    /* TICKER */
+    .ticker { border-top:1px solid var(--border); border-bottom:1px solid var(--border); background: var(--card); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+    .ticker-track { display: inline-flex; animation: marquee 32s linear infinite; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .ticker-item { display: inline-flex; align-items: center; gap: 1rem; padding: 0 2.5rem; font-size: 0.82rem; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; }
+    .tdot { width:5px; height:5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+    /* SECTIONS */
+    .s { padding: 7rem 3rem; }
+    .s-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem; }
+    .s-tag::before { content:''; width:20px; height:2px; background: var(--accent2); border-radius:2px; }
+    .s-title { font-family: 'Manrope', sans-serif; font-size: clamp(2rem,3.5vw,3rem); font-weight: 900; letter-spacing: -0.05em; line-height: 1.05; margin-bottom: 1rem; }
+    .s-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 520px; }
+
+    /* PRODUCTS */
+    .products-section { background: var(--bg); }
+    .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; gap: 2rem; }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+    }
+    .pc {
+      background: var(--card);
+      padding: 1.4rem 1.5rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background .2s; cursor: default; position: relative;
+    }
+    .pc:nth-child(4n) { border-right: none; }
+    .pc:nth-last-child(-n+4) { border-bottom: none; }
+    .pc::after { content:''; position:absolute; top:0; left:0; width:2px; height:0; background:var(--grad); transition:height .3s; }
+    .pc:hover { background: #0f1c32; }
+    .pc:hover::after { height: 100%; }
+    .pc:hover .pi { transform: scale(1.12); }
+    .pi {
+      width: 40px; height: 40px;
+      margin-bottom: .9rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      font-size: 1.25rem;
+      transition: transform .2s;
+    }
+    .pc h3 { font-family:'Manrope',sans-serif; font-size:0.88rem; font-weight:700; margin-bottom:.35rem; letter-spacing:-0.01em; }
+    .pc p { font-size:0.76rem; color:var(--muted); line-height:1.55; }
+    .pc.feat {
+      grid-column: span 2;
+      background: linear-gradient(135deg,#0d1a35,#0a1428);
+      border-right: 1px solid var(--border);
+    }
+    .pc.feat .pi { width:48px; height:48px; font-size:1.6rem; }
+    .pc.feat h3 { font-size: 1rem; }
+    .pc.feat p { font-size: 0.82rem; }
+    .pbadge { display:inline-block; background: rgba(26,111,232,0.15); color: var(--accent2); font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:100px; margin-bottom:.7rem; border: 1px solid rgba(26,111,232,0.25); }
+
+    /* WHY */
+    .why-section { background: var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .why-feats { display:flex; flex-direction:column; margin-top:2.5rem; }
+    .wf {
+      display:flex; gap:1.2rem; padding:1.5rem 0;
+      border-bottom:1px solid var(--border); position:relative;
+      transition: padding-left .25s;
+    }
+    .wf::before {
+      content:''; position:absolute; left:-3rem; top:0; bottom:0; width:3px;
+      background:var(--grad); transform:scaleY(0); transition:transform .3s; transform-origin:top;
+    }
+    .wf:hover { padding-left:.5rem; }
+    .wf:hover::before { transform:scaleY(1); }
+    .wf-num { font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:800; color:var(--accent); letter-spacing:0.06em; flex-shrink:0; padding-top:3px; }
+    .wf h4 { font-size:0.95rem; font-weight:600; margin-bottom:4px; }
+    .wf p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+    .why-vis { position:sticky; top:100px; }
+    .why-card {
+      background: linear-gradient(145deg,#111e38,#0c1525);
+      border:1px solid rgba(26,111,232,0.18); border-radius:24px; padding:2.5rem;
+      position:relative; overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,0.5);
+    }
+    .why-card::before { content:''; position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle,rgba(26,111,232,0.15),transparent 70%); }
+    .why-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(69,170,255,0.5),transparent); }
+    .wct { font-family:'Manrope',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:1.5rem; position:relative; }
+    .chips { display:flex; flex-wrap:wrap; gap:.6rem; position:relative; }
+    .chip {
+      background:rgba(26,111,232,0.08); border:1px solid rgba(26,111,232,0.15);
+      color:var(--text); font-size:0.78rem; font-weight:500; padding:6px 14px;
+      border-radius:100px; transition:background .2s, border-color .2s;
+    }
+    .chip:hover { background:rgba(26,111,232,0.16); border-color:rgba(26,111,232,0.35); }
+    .wdiv { border:none; border-top:1px solid var(--border); margin:1.8rem 0; }
+    .apps-row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; position:relative; }
+    .arc { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:12px; padding:1rem; }
+    .arc h5 { font-size:0.85rem; font-weight:600; margin-bottom:2px; }
+    .arc span { font-size:0.72rem; color:var(--muted); display:block; margin-bottom:.5rem; }
+    .slinks { display:flex; gap:.4rem; }
+    .sl { background:rgba(255,255,255,0.06); color:var(--muted); font-size:0.65rem; font-weight:700; letter-spacing:0.04em; padding:3px 8px; border-radius:5px; text-decoration:none; transition:color .2s, background .2s; }
+    .sl:hover { color:var(--text); background:rgba(255,255,255,0.1); }
+
+    /* ABOUT */
+    .about-section { background:var(--bg); position:relative; overflow:hidden; }
+    .about-section::before { content:''; position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; background:radial-gradient(circle,rgba(26,111,232,0.07),transparent 65%); pointer-events:none; }
+    .about-inner { display:grid; grid-template-columns:0.9fr 1.1fr; gap:6rem; align-items:center; position:relative; z-index:1; }
+    .aqc {
+      background:var(--card2); border:1px solid rgba(26,111,232,0.15); border-radius:24px; padding:2.5rem;
+      position:relative; overflow:hidden;
+    }
+    .aqc::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),var(--teal)); }
+    .bq { font-family:'Manrope',sans-serif; font-size:6rem; font-weight:900; line-height:0.7; color:rgba(26,111,232,0.1); margin-bottom:1rem; display:block; }
+    .aqt { font-size:0.95rem; line-height:1.8; color:var(--muted); margin-bottom:2rem; }
+    .aqt strong { color:var(--text); font-weight:600; }
+    .ametrics { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+    .ambox { background:var(--card); padding:1.2rem 1.5rem; }
+    .amval { font-family:'Manrope',sans-serif; font-size:2rem; font-weight:900; letter-spacing:-0.04em; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:3px; }
+    .amlbl { font-size:0.75rem; color:var(--muted); }
+    .atcol .s-title { margin-bottom:1.5rem; }
+    .atcol .s-sub { margin-bottom:2rem; max-width:100%; }
+    .timeline { display:flex; flex-direction:column; }
+    .ti { display:flex; gap:1.5rem; padding:1.2rem 0; border-left:2px solid var(--border); padding-left:1.5rem; position:relative; transition:border-color .2s; }
+    .ti:hover { border-left-color:var(--accent); }
+    .ti::before { content:''; position:absolute; left:-5px; top:1.5rem; width:8px; height:8px; background:var(--bg2); border:2px solid var(--muted); border-radius:50%; transition:border-color .2s, background .2s; }
+    .ti:hover::before { border-color:var(--accent); background:var(--accent); }
+    .ti h4 { font-size:0.9rem; font-weight:600; margin-bottom:3px; }
+    .ti p { font-size:0.8rem; color:var(--muted); line-height:1.5; }
+
+    /* CONTACT */
+    .contact-section { background: var(--bg2); border-top:1px solid var(--border); }
+    .contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .ccards { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:2rem; }
+    .cc {
+      padding:.9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display:flex; align-items:flex-start; gap:.7rem;
+      transition: border-color .2s;
+    }
+    .cc:hover { border-color: rgba(26,111,232,0.35); }
+    .cci { font-size:1rem; flex-shrink:0; margin-top:2px; opacity:.7; }
+    .cc h4 { font-size:0.68rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+    .cc a, .cc p { font-size:0.88rem; font-weight:500; color:var(--text); text-decoration:none; line-height:1.4; }
+    .cc a:hover { color:var(--accent2); }
+    .map-wrap { border-radius:16px; overflow:hidden; border:1px solid var(--border); height:100%; min-height:420px; box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+    .map-wrap iframe { width:100%; height:100%; border:none; filter:grayscale(0.5) invert(0.9) hue-rotate(200deg) saturate(0.7); }
+
+    /* CLIENTES CARROSSEL */
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .carousel-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: scroll-left 40s linear infinite;
+    }
+    .carousel-track:hover { animation-play-state: paused; }
+    .carousel-track-2 {
+      animation-direction: reverse;
+      animation-duration: 50s;
+    }
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .logo-card {
+      background: linear-gradient(145deg, #111828, #0d1525);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 90px;
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+      cursor: default;
+    }
+    .logo-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: radial-gradient(circle at 50% 0%, rgba(69,170,255,0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    .logo-card:hover {
+      transform: translateY(-4px) scale(1.05);
+      border-color: rgba(69,170,255,0.3);
+      box-shadow: 0 12px 40px rgba(26,111,232,0.2);
+    }
+    .logo-card:hover::before { opacity: 1; }
+    .logo-card img {
+      max-width: 85%;
+      max-height: 65px;
+      object-fit: contain;
+      filter: grayscale(0.3) brightness(0.9);
+      transition: filter .3s ease, transform .3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .logo-card:hover img {
+      filter: grayscale(0) brightness(1.15);
+      transform: scale(1.06);
+    }
+
+    /* FOOTER */
+    footer { background:var(--bg); border-top:1px solid var(--border); }
+    .foot-inner { padding:3rem 3rem 2rem; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:3rem; }
+    .fbrand .nav-logo { font-size:1.4rem; margin-bottom:1rem; }
+    .fbrand p { font-size:0.82rem; color:var(--muted); line-height:1.7; max-width:300px; }
+    .fcol h5 { font-family:'Manrope',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:1.2rem; }
+    .fcol a { display:block; font-size:0.85rem; color:var(--text); text-decoration:none; margin-bottom:.6rem; opacity:.7; transition:opacity .2s, color .2s; }
+    .fcol a:hover { opacity:1; color:var(--accent2); }
+    .foot-bot { border-top:1px solid var(--border); padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .foot-bot p { font-size:0.75rem; color:var(--muted); }
+    .fbl { display:flex; gap:1.5rem; }
+    .fbl a { font-size:0.75rem; color:var(--muted); text-decoration:none; }
+    .fbl a:hover { color:var(--text); }
+
+    /* NAV DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+    .nav-dropdown > a .chevron {
+      font-size: 0.6rem; transition: transform .25s; display: inline-block;
+    }
+    .nav-dropdown.active > a .chevron { transform: rotate(180deg); }
+    .nav-drop-menu {
+      position: absolute; top: calc(100% + 18px); left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      min-width: 190px;
+      background: #0d1525; border: 1px solid rgba(69,170,255,0.15);
+      border-radius: 14px; padding: 8px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s, transform .2s;
+      z-index: 300;
+    }
+    .nav-drop-menu::before {
+      content:''; position:absolute; top:-5px; left:50%; transform:translateX(-50%);
+      width:10px; height:10px; background:#0d1525;
+      border-left:1px solid rgba(69,170,255,0.15); border-top:1px solid rgba(69,170,255,0.15);
+      transform:translateX(-50%) rotate(45deg);
+    }
+    .nav-dropdown.active .nav-drop-menu {
+      opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0);
+    }
+    .nav-drop-menu a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px; border-radius: 9px;
+      font-size: 0.82rem; font-weight: 500; color: var(--muted) !important;
+      text-decoration: none; transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+    .nav-drop-menu a::after { display: none !important; }
+    .nav-drop-menu a:hover { background: rgba(26,111,232,0.1); color: var(--text) !important; }
+    .nav-drop-menu a .drop-ico { font-size: 1rem; flex-shrink: 0; }
+
+    /* SEGMENTOS SECTION */
+    .seg-section { background: var(--bg2); border-top: 1px solid var(--border); }
+    .seg-header { text-align: center; margin-bottom: 3.5rem; }
+    .seg-header .s-sub { margin: 0 auto; }
+    .seg-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+    .seg-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 1rem;
+      cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .seg-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background: var(--grad); transform: scaleX(0); transition: transform .3s;
+    }
+    .seg-card:hover { transform: translateY(-6px); border-color: rgba(26,111,232,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .seg-card:hover::before { transform: scaleX(1); }
+    .seg-card:hover .seg-ico { transform: scale(1.15); }
+    .seg-ico {
+      width: 64px; height: 64px; border-radius: 18px;
+      display: grid; place-items: center; font-size: 1.9rem;
+      transition: transform .3s;
+      flex-shrink: 0;
+    }
+    .seg-card h3 { font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 800; letter-spacing: -0.02em; }
+    .seg-card p { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+    .seg-tag-list { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+    .seg-tag {
+      background: rgba(26,111,232,0.07); border: 1px solid rgba(26,111,232,0.12);
+      color: var(--muted); font-size: 0.62rem; font-weight: 600;
+      padding: 3px 9px; border-radius: 100px;
+      transition: background .2s, color .2s;
+    }
+    .seg-card:hover .seg-tag { background: rgba(26,111,232,0.14); color: var(--text); }
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;padding:90px 1.5rem 4rem;}
+      .hero::before{display:none;}
+      .hero-right{order:-1;}
+      .why-inner,.about-inner,.contact-inner{grid-template-columns:1fr;gap:2.5rem;}
+      .products-grid{grid-template-columns:1fr 1fr;}
+      .pc.feat{grid-column:span 2;}
+      .s{padding:4rem 1.5rem;}
+      .products-header{flex-direction:column;}
+      nav{padding:0 1.5rem;}
+      .nav-links{display:none;}
+      .foot-inner{grid-template-columns:1fr;gap:2rem;}
+      .foot-bot{padding:1.5rem;}
+      .seg-grid{grid-template-columns:1fr 1fr;}
+    }
+
+    /* DEPOIMENTOS */
+    .dep-outer {
+      max-width: 860px;
+      margin: 0 auto 2.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .dep-track {
+      display: flex;
+      gap: 1rem;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
+    }
+    .dep-card {
+      min-width: calc((100% - 2rem) / 3);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      flex-shrink: 0;
+      transition: border-color .25s, transform .25s;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .dep-card:hover { border-color: rgba(69,170,255,0.2); transform: translateY(-2px); }
+    .dep-stars-top { color:#fbbf24; font-size:.6rem; letter-spacing:2px; }
+    .dep-text {
+      font-size:.78rem; line-height:1.65; color:var(--muted);
+      font-style:italic; flex:1;
+    }
+    .dep-sep { height:1px; background:var(--border); }
+    .dep-author { display:flex; align-items:center; gap:.7rem; }
+    .dep-av {
+      width:32px; height:32px; border-radius:50%; flex-shrink:0;
+      background:var(--grad); display:grid; place-items:center;
+      font-size:.75rem;
+    }
+    .dep-name { font-size:.78rem; font-weight:700; line-height:1.2; }
+    .dep-role { font-size:.65rem; color:var(--muted); }
+    .dep-controls {
+      display:flex; align-items:center; justify-content:center;
+      gap:.8rem; margin-bottom:3rem;
+    }
+    .dep-btn {
+      width:32px; height:32px; border-radius:50%;
+      background:rgba(26,111,232,0.1); border:1px solid rgba(26,111,232,0.2);
+      color:var(--text); cursor:pointer; font-size:1rem;
+      display:grid; place-items:center; line-height:1;
+      transition:background .2s, border-color .2s;
+    }
+    .dep-btn:hover { background:rgba(26,111,232,0.25); border-color:var(--accent); }
+    .dep-dots { display:flex; gap:.4rem; align-items:center; }
+    .dep-dot {
+      width:5px; height:5px; border-radius:50%;
+      background:rgba(255,255,255,0.15); cursor:pointer;
+      transition:background .2s, transform .2s, width .2s;
+    }
+    .dep-dot.active { background:var(--accent2); transform:scale(1.4); }
+    .dep-video-row {
+      display:grid; grid-template-columns:240px 1fr;
+      gap:2.5rem; align-items:center;
+      max-width:860px; margin:0 auto;
+    }
+    .dep-video-box {
+      width:240px; height:340px; border-radius:14px;
+      overflow:hidden; flex-shrink:0;
+      border:1px solid rgba(69,170,255,0.15);
+      box-shadow:0 12px 32px rgba(0,0,0,0.5);
+      position:relative; background:#000;
+    }
+    .dep-video-box::before {
+      content:''; position:absolute; top:0; left:0; right:0;
+      height:2px; background:var(--grad); z-index:1;
+    }
+    .dep-video-box iframe { width:100%; height:100%; border:none; display:block; }
+    .dep-video-info { display:flex; flex-direction:column; gap:1.2rem; }
+    .dep-vbadge {
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(26,111,232,0.08); border:1px solid rgba(26,111,232,0.18);
+      color:var(--accent2); font-size:.65rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:4px 12px; border-radius:100px; width:fit-content;
+    }
+    .dep-vtitle {
+      font-family:'Manrope',sans-serif; font-size:1.35rem;
+      font-weight:900; letter-spacing:-.04em; line-height:1.2;
+    }
+    .dep-vtitle em { font-style:normal; background:var(--grad);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .dep-vdesc { font-size:.82rem; color:var(--muted); line-height:1.7; }
+    .dep-vclient {
+      display:flex; align-items:center; gap:.8rem;
+      padding:.85rem 1rem;
+      background:rgba(255,255,255,0.03); border:1px solid var(--border);
+      border-radius:10px;
+    }
+    .dep-vclient-av {
+      width:38px; height:38px; border-radius:50%; flex-shrink:0;
+      background:var(--grad); display:grid; place-items:center;
+      font-size:1rem; border:2px solid rgba(69,170,255,0.25);
+    }
+    .dep-vclient-name { font-size:.82rem; font-weight:700; }
+    .dep-vclient-role { font-size:.68rem; color:var(--muted); margin-top:1px; }
+    .dep-vclient-stars { color:#fbbf24; font-size:.55rem; letter-spacing:1px; margin-top:2px; }
+
+    @media(max-width:900px){
+      .dep-card { min-width:100%; }
+      .dep-video-row { grid-template-columns:1fr; }
+      .dep-video-box { width:100%; height:280px; }
+    }
+
+    /* ═══ MODAL SEGMENTOS ═══ */
+    .seg-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(4,7,14,0.92); backdrop-filter: blur(12px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 24px 16px; overflow-y: auto;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .seg-overlay.open { opacity: 1; pointer-events: all; }
+    .seg-modal {
+      background: linear-gradient(145deg, #0c1525, #070b14);
+      border: 1px solid rgba(69,170,255,0.18);
+      border-radius: 24px; width: 100%; max-width: 900px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+      transform: translateY(30px);
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .seg-overlay.open .seg-modal { transform: translateY(0); }
+    .seg-modal::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--modal-grad, var(--grad));
+    }
+    .seg-modal-close {
+      position: absolute; top: 18px; right: 20px; z-index: 10;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted); font-size: 1.2rem; cursor: pointer;
+      display: grid; place-items: center;
+      transition: background .2s, color .2s;
+    }
+    .seg-modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+    .seg-modal-hero {
+      padding: 3rem 3rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .seg-modal-hero::after {
+      content: ''; position: absolute; top: -30%; right: -10%;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: radial-gradient(circle, var(--modal-glow, rgba(26,111,232,0.15)) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .seg-modal-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--modal-c2, var(--accent2));
+      margin-bottom: 1rem;
+    }
+    .seg-modal-eyebrow::before { content:''; width:20px; height:2px; background: var(--modal-grad, var(--grad)); border-radius:2px; }
+    .seg-modal-emoji { font-size: 3rem; display: block; margin-bottom: .8rem; }
+    .seg-modal h2 {
+      font-family: 'Manrope', sans-serif; font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -0.05em;
+      line-height: 1.0; margin-bottom: .5rem;
+    }
+    .seg-modal h2 em { font-style:normal; background: var(--modal-grad, var(--grad)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .seg-modal-sub { font-size: 1rem; font-weight: 600; color: var(--muted); margin-bottom: 1rem; }
+    .seg-modal-desc { font-size: 0.9rem; line-height: 1.75; color: var(--muted); max-width: 600px; }
+    .seg-modal-stats {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--card);
+    }
+    .seg-stat {
+      text-align: center; padding: 1.2rem 1rem;
+      border-right: 1px solid var(--border);
+    }
+    .seg-stat:last-child { border-right: none; }
+    .seg-stat-val { font-family:'Manrope',sans-serif; font-size:1.6rem; font-weight:900; letter-spacing:-0.05em; background: var(--modal-grad, var(--grad)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin-bottom:2px; }
+    .seg-stat-lbl { font-size: 0.7rem; color: var(--muted); }
+    .seg-modal-feats {
+      padding: 2.5rem 3rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border-top: 1px solid var(--border);
+    }
+    .seg-feat {
+      background: var(--card); padding: 1.5rem 1.5rem;
+      position: relative; overflow: hidden;
+      transition: background .2s;
+    }
+    .seg-feat::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--modal-grad,var(--grad)); transform:scaleX(0); transition:transform .3s; }
+    .seg-feat:hover { background: #0f1c32; }
+    .seg-feat:hover::before { transform:scaleX(1); }
+    .seg-feat-ico {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--modal-ico-bg, rgba(26,111,232,0.12));
+      border: 1px solid var(--modal-ico-border, rgba(26,111,232,0.2));
+      display: grid; place-items: center; font-size: 1.3rem;
+      margin-bottom: 1rem; transition: transform .2s;
+    }
+    .seg-feat:hover .seg-feat-ico { transform: scale(1.1); }
+    .seg-feat h4 { font-family:'Manrope',sans-serif; font-size:.88rem; font-weight:800; letter-spacing:-.01em; margin-bottom:.4rem; }
+    .seg-feat p { font-size:.75rem; color:var(--muted); line-height:1.6; }
+    .seg-modal-cta {
+      padding: 2.5rem 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, #0a1020, #0c1525);
+      border-top: 1px solid var(--border);
+    }
+    .seg-cta-title { font-family:'Manrope',sans-serif; font-size:1.3rem; font-weight:800; letter-spacing:-.04em; margin-bottom:.7rem; }
+    .seg-cta-title em { font-style:normal; background: var(--modal-grad, var(--grad)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .seg-cta-desc { font-size:.83rem; color:var(--muted); margin-bottom:1.5rem; line-height:1.6; }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff; padding: 14px 32px; border-radius: 12px;
+      font-family: 'Manrope', sans-serif; font-weight: 800; font-size: .95rem;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(37,211,102,0.5); }
+    .seg-cta-note { margin-top: .9rem; font-size: .72rem; color: var(--muted); }
+    .seg-cta-note a { color: var(--accent2); text-decoration: none; }
+    @media(max-width:700px){
+      .seg-modal-feats { grid-template-columns: 1fr 1fr; }
+      .seg-modal-stats { grid-template-columns: 1fr 1fr; }
+      .seg-stat:nth-child(2) { border-right: none; }
+      .seg-modal-hero, .seg-modal-feats, .seg-modal-cta { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media(max-width:480px){
+      .seg-modal-feats { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     1. NAV
+════════════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo"><img src="data:image/jpeg;base64,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" alt="Logo" style="width:32px;height:32px;border-radius:8px;object-fit:cover;">SAGRES</div>
+  <div class="nav-links">
+    <a href="#produtos">Produtos</a>
+    <div class="nav-dropdown" id="navDropdown">
+      <a href="#" onclick="toggleDropdown(event)">Segmentos <span class="chevron">▼</span></a>
+      <div class="nav-drop-menu">
+        <a href="#" onclick="document.getElementById('navDropdown').classList.remove('active');openSeg('padarias');return false;"><span class="drop-ico">🥖</span>Padarias</a>
+        <a href="#" onclick="document.getElementById('navDropdown').classList.remove('active');openSeg('restaurantes');return false;"><span class="drop-ico">🍽️</span>Restaurantes</a>
+        <a href="#" onclick="document.getElementById('navDropdown').classList.remove('active');openSeg('cafeterias');return false;"><span class="drop-ico">☕</span>Cafeterias</a>
+        <a href="#" onclick="document.getElementById('navDropdown').classList.remove('active');openSeg('bares');return false;"><span class="drop-ico">🍺</span>Bares & Chopperias</a>
+        <a href="#" onclick="document.getElementById('navDropdown').classList.remove('active');openSeg('franquias');return false;"><span class="drop-ico">🏪</span>Franquias</a>
+        <a href="#" onclick="document.getElementById('navDropdown').classList.remove('active');openSeg('pizzarias');return false;"><span class="drop-ico">🍕</span>Pizzarias</a>
+      </div>
+    </div>
+    <a href="#porque">Por que Sagres?</a>
+    <a href="#clientes">Clientes</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#contato">Contato</a>
+    <a href="https://wa.me/554333388099" target="_blank" rel="noopener" class="nav-phone">📞 43 3338-8099</a>
+    <a href="https://admin.sagrescloud.com.br/login" class="nav-cta" target="_blank">Área do Usuário →</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     2. HERO
+════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-ring" style="width:420px;height:420px;top:5%;right:2%;animation:spin 30s linear infinite;opacity:.5"></div>
+  <div class="hero-ring" style="width:200px;height:200px;top:25%;right:18%;animation:spin 18s linear infinite reverse;opacity:.3"></div>
+  <style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Automação Comercial · Londrina – PR</div>
+    <h1>
+      Tecnologia que<br>
+      <em>transforma</em> seu<br>
+      <span class="outline">restaurante.</span>
+    </h1>
+    <p class="hero-desc">Mais de 20 anos integrando software, hardware e suporte técnico especializado. Soluções completas para bares, restaurantes, lanchonetes e franquias.</p>
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">Falar com especialista <span class="arrow">→</span></a>
+      <a href="#produtos" class="btn-ghost">Ver produtos</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-avs">
+        <div class="trust-av">🍕</div>
+        <div class="trust-av">🍔</div>
+        <div class="trust-av">🥩</div>
+        <div class="trust-av">🍣</div>
+        <div class="trust-av">+</div>
+      </div>
+      <div class="trust-text">Confiado por <strong>+5.000 PDVs</strong> em todo o Brasil</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-main-card">
+      <div class="card-lbl">Anos de Experiência</div>
+      <div class="big-num">+20</div>
+      <div class="big-desc">Anos no mercado nacional de automação comercial</div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card"><div class="mini-val blue">+5k</div><div class="mini-lbl">PDVs instalados</div></div>
+      <div class="mini-card"><div class="mini-val teal">Stone</div><div class="mini-lbl">Partner Oficial</div></div>
+    </div>
+    <div class="support-badge">
+      <div class="support-ico">⚡</div>
+      <div>
+        <h4>Suporte 24/7/365</h4>
+        <p>Plantão emergencial disponível todos os dias, incluindo feriados</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     3. TICKER
+════════════════════════════════════════════════════════════ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="tdot"></span>Sagres NFCe</span>
+    <span class="ticker-item"><span class="tdot"></span>Prato Digital</span>
+    <span class="ticker-item"><span class="tdot"></span>Suporte 24/7</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres Delivery</span>
+    <span class="ticker-item"><span class="tdot"></span>Alô Garçom</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres Gestão</span>
+    <span class="ticker-item"><span class="tdot"></span>Programa Fidelidade</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres Franquia</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres CRM</span>
+    <span class="ticker-item"><span class="tdot"></span>Stone Partner Oficial</span>
+    <span class="ticker-item"><span class="tdot"></span>+20 Anos de Mercado</span>
+    <span class="ticker-item"><span class="tdot"></span>NFCe · NFe · SEFAZ</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres NFCe</span>
+    <span class="ticker-item"><span class="tdot"></span>Prato Digital</span>
+    <span class="ticker-item"><span class="tdot"></span>Suporte 24/7</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres Delivery</span>
+    <span class="ticker-item"><span class="tdot"></span>Alô Garçom</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres Gestão</span>
+    <span class="ticker-item"><span class="tdot"></span>Programa Fidelidade</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres Franquia</span>
+    <span class="ticker-item"><span class="tdot"></span>Sagres CRM</span>
+    <span class="ticker-item"><span class="tdot"></span>Stone Partner Oficial</span>
+    <span class="ticker-item"><span class="tdot"></span>+20 Anos de Mercado</span>
+    <span class="ticker-item"><span class="tdot"></span>NFCe · NFe · SEFAZ</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     4. SEGMENTOS
+════════════════════════════════════════════════════════════ -->
+<section class="s seg-section" id="segmentos">
+  <div class="seg-header">
+    <div class="s-tag" style="justify-content:center;">Segmentos</div>
+    <h2 class="s-title">Solução para cada tipo de negócio</h2>
+    <p class="s-sub">Do balcão à franqueadora, a Sagres tem o sistema certo para o seu segmento — com funcionalidades específicas para cada operação.</p>
+  </div>
+
+  <div class="seg-grid">
+
+    <a class="seg-card" href="#" onclick="openSeg('padarias');return false;">
+      <div class="seg-ico" style="background:linear-gradient(135deg,#ff6b35,#f7c59f33)">🥖</div>
+      <h3>Padarias</h3>
+      <p>Controle de produção, encomendas e venda antecipada de créditos para clientes fiéis.</p>
+      <div class="seg-tag-list">
+        <span class="seg-tag">Encomendas</span>
+        <span class="seg-tag">Venda Antecipada</span>
+        <span class="seg-tag">NFCe</span>
+      </div>
+    </a>
+
+    <a class="seg-card" href="#" onclick="openSeg('restaurantes');return false;">
+      <div class="seg-ico" style="background:linear-gradient(135deg,#1a6fe8,#45aaff33)">🍽️</div>
+      <h3>Restaurantes</h3>
+      <p>PDV, Alô Garçom, monitor de cozinha, comanda eletrônica e programa de fidelidade integrado.</p>
+      <div class="seg-tag-list">
+        <span class="seg-tag">Comanda Digital</span>
+        <span class="seg-tag">Cozinha</span>
+        <span class="seg-tag">Fidelidade</span>
+      </div>
+    </a>
+
+    <a class="seg-card" href="#" onclick="openSeg('cafeterias');return false;">
+      <div class="seg-ico" style="background:linear-gradient(135deg,#00b894,#55efc433)">☕</div>
+      <h3>Cafeterias</h3>
+      <p>Totem de autoatendimento, delivery, fila inteligente e CRM para relacionamento próximo.</p>
+      <div class="seg-tag-list">
+        <span class="seg-tag">Fura Fila</span>
+        <span class="seg-tag">Delivery</span>
+        <span class="seg-tag">CRM</span>
+      </div>
+    </a>
+
+    <a class="seg-card" href="#" onclick="openSeg('bares');return false;">
+      <div class="seg-ico" style="background:linear-gradient(135deg,#fdcb6e,#ffeaa733)">🍺</div>
+      <h3>Bares & Chopperias</h3>
+      <p>Conta assinada, fiado, controle de estoque de bebidas e relatórios de consumo por mesa.</p>
+      <div class="seg-tag-list">
+        <span class="seg-tag">Conta Assinada</span>
+        <span class="seg-tag">Fiado</span>
+        <span class="seg-tag">Estoque</span>
+      </div>
+    </a>
+
+    <a class="seg-card" href="#" onclick="openSeg('franquias');return false;">
+      <div class="seg-ico" style="background:linear-gradient(135deg,#a29bfe,#d8d4ff33)">🏪</div>
+      <h3>Franquias</h3>
+      <p>Gestão centralizada entre franqueador e franqueados, sincronização de preços e relatórios consolidados.</p>
+      <div class="seg-tag-list">
+        <span class="seg-tag">Multi-unidade</span>
+        <span class="seg-tag">Integração</span>
+        <span class="seg-tag">DRE</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     5. CLIENTES
+════════════════════════════════════════════════════════════ -->
+<section class="s" id="clientes" style="background:var(--bg);border-top:1px solid var(--border);overflow:hidden;padding-top:5rem;padding-bottom:5rem;">
+  <div style="text-align:center;margin-bottom:3rem;">
+    <div class="s-tag" style="justify-content:center;">Clientes</div>
+    <h2 class="s-title">Quem confia na Sagres</h2>
+    <p class="s-sub" style="margin:0 auto;">Restaurantes, bares, lanchonetes, pizzarias e franquias em todo o Brasil.</p>
+  </div>
+
+  <div class="carousel-wrap" style="margin-bottom:1rem;">
+    <div class="carousel-track">
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/hamburguersP.jpg"    alt="Hamburguer's"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/zelanches.png"        alt="Zelanches"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/dalicencaP.jpg"       alt="Da Licença"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/galpaonelore.png"     alt="Galpão Nelore"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pastelmelP.png"       alt="Pastel Mel"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/donatelloL.jpg"       alt="Donatello"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/lagondolaP.jpg"       alt="La Gondola"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/borelP.png"           alt="Borel"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/picwichP.png"         alt="Picwich"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/bambuzaP.png"         alt="Bambuza"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/robsP.png"            alt="Rob's"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/dogkingP.jpg"         alt="Dog King"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/jetP.png"             alt="Jet"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/apps/arnaldos_app.jpg" alt="Arnaldo's"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/kiberamaP.png"        alt="Kiberama"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/viraP.png"            alt="Vira"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pizzaMovieP.jpg"      alt="Pizza Movie"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/jinjin.png"           alt="Jin Jin"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/hamburguersP.jpg"    alt="Hamburguer's"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/zelanches.png"        alt="Zelanches"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/dalicencaP.jpg"       alt="Da Licença"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/galpaonelore.png"     alt="Galpão Nelore"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pastelmelP.png"       alt="Pastel Mel"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/donatelloL.jpg"       alt="Donatello"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/lagondolaP.jpg"       alt="La Gondola"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/borelP.png"           alt="Borel"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/picwichP.png"         alt="Picwich"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/bambuzaP.png"         alt="Bambuza"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/robsP.png"            alt="Rob's"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/dogkingP.jpg"         alt="Dog King"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/jetP.png"             alt="Jet"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/apps/arnaldos_app.jpg" alt="Arnaldo's"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/kiberamaP.png"        alt="Kiberama"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/viraP.png"            alt="Vira"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pizzaMovieP.jpg"      alt="Pizza Movie"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/jinjin.png"           alt="Jin Jin"></div>
+    </div>
+  </div>
+
+  <div class="carousel-wrap">
+    <div class="carousel-track carousel-track-2">
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/piubellaP.png"        alt="Piú Bella"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pizzaClubP.png"       alt="Pizza Club"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/chikP.png"            alt="Chik"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/nortesul.png"         alt="Norte Sul"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/gelobelLogo.jpg"      alt="Gelobel"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pizzamaisP.png"       alt="Pizza Mais"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/TortasAlemasP.png"    alt="Tortas Alemãs"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/moinhoP.png"          alt="Moinho"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/nacaoP.png"           alt="Nação"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/limoziniP.png"        alt="Limozini"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/chimarraoP.png"       alt="Chimarrão"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/chimarraoGrillP.png"  alt="Chimarrão Grill"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/valentinoP.jpg"       alt="Valentino"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/arnaldo.jpg"          alt="Arnaldo"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pandorP.png"          alt="Pandor"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/prosperidadeP.jpg"   alt="Prosperidade"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/freddoP.png"          alt="Freddo"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/palhano.jpg"          alt="Palhano"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/ventosulP.png"        alt="Vento Sul"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/rioP.jpg"             alt="Rio"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/hachimitsu.png"       alt="Hachimitsu"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/zanoniP.jpg"          alt="Zanoni"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/cucaP.jpg"            alt="Cuca"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/ilhabela.jpg"         alt="Ilha Bela"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/piubellaP.png"        alt="Piú Bella"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pizzaClubP.png"       alt="Pizza Club"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/chikP.png"            alt="Chik"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/nortesul.png"         alt="Norte Sul"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/gelobelLogo.jpg"      alt="Gelobel"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pizzamaisP.png"       alt="Pizza Mais"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/TortasAlemasP.png"    alt="Tortas Alemãs"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/moinhoP.png"          alt="Moinho"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/nacaoP.png"           alt="Nação"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/limoziniP.png"        alt="Limozini"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/chimarraoP.png"       alt="Chimarrão"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/chimarraoGrillP.png"  alt="Chimarrão Grill"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/valentinoP.jpg"       alt="Valentino"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/arnaldo.jpg"          alt="Arnaldo"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/pandorP.png"          alt="Pandor"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/prosperidadeP.jpg"   alt="Prosperidade"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/freddoP.png"          alt="Freddo"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/palhano.jpg"          alt="Palhano"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/ventosulP.png"        alt="Vento Sul"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/rioP.jpg"             alt="Rio"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/hachimitsu.png"       alt="Hachimitsu"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/zanoniP.jpg"          alt="Zanoni"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/cucaP.jpg"            alt="Cuca"></div>
+      <div class="logo-card"><img src="https://sagresinformatica.com.br/img/logoClientes/londrina/ilhabela.jpg"         alt="Ilha Bela"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     6. PRODUTOS
+════════════════════════════════════════════════════════════ -->
+<section class="s products-section" id="produtos">
+  <div class="products-header">
+    <div><div class="s-tag">Portfólio</div><h2 class="s-title">Nossos Produtos</h2></div>
+    <p class="s-sub">Soluções integradas para cada etapa — do pedido à gestão financeira e fiscal do seu estabelecimento.</p>
+  </div>
+  <div class="products-grid">
+    <div class="pc feat">
+      <div class="pbadge">Destaque</div>
+      <div class="pi" style="background:linear-gradient(135deg,#ff6b35,#f7c59f)">🍽️</div>
+      <h3>Prato Digital</h3>
+      <p>Portal, site, app e weblink completo — Delivery, Retirada, Fura Fila, Eu Que Peço e Programa de Fidelidade em uma única plataforma.</p>
+    </div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#1a6fe8,#45aaff22)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAFHUlEQVR4nO2Y628UVRjGf2cuu7Pd3bLdUoTdCm2hNyRojBaqBhXEK0Y0xv/QGKPGa7wblaBBRKJcspSmraWUAu0Cu3Rnd2fOnNcPa8HEDzK7Rfng82mSmZz55X3nPM87R534ZU64h2X91wD/pP8BO9U9D+jcjUVFBBFQCkABa9fxta6AxghKKZIJB9tRaG0QUYCgQ7PG+u8DroF1dTlEWphfqHDu/DUuXrqJ72sO7h9gbCRPs6lRMUvZEaBIq52plEOkDb+dXubY8UvMzVcIAoPrWtT8kP5ihl3jvTQkfqvbBhQRXNfGti1KU2W+OzLP7O+VP1ts46ZtLKXQkZDPebSbBm0BikAi4VAu1/nimzlOnVkGBamUe6uqYgRBSLiK7UM5tDax29sWoIiQTDqcLa3w1jslgsDgea1ljLldJ8tS1OuaneO99Be72/r+2gIEhTGGfN7Dda0/X9qylb/KGMFxFPv3bf3bvTiKbdRKQRAY+gtZXn15hEYjbC1k3fY721bUagEHntrG4LZc29VrC3ANplYLeWj3Jl45NIzvhzSbEQDGQKXaZO+jW3h631b8engLvh2ptsYtEQSFiJDNJpiavsbHn85wdcUn4VpMThR46fkdBIEmCAytp2mrirEARSCZsJidr+AlHfqLWS4u3uRGpcn4aJ5qNcDzbHpyKX4+uUTKcxje3sPCYhW/rtkx1EOzGcXywlibRESwHYtTp5cZH83jJXP8+NMi335/gb0TBR5+8D6MCFPnZzh6bJGxkTxjI3n8uubUmWVGduQRkViVjAVo2y3rKE2tMDS4ARHwayFeyuXXU1c5d74MKBoNjetYNBoaHQlBYChNlfH9ENu2kBjb+o4BjWlFWmmqzOJSjes3mti2YvPmNNOz13nxue3sGu9FBC4sVPngk2nu25TG8xyu32iwdHmVmbkb7NrZRz3GxrljQKVa00lPj0exkGFm9jp+XfP4ZJG9EwVy3R5R1JpYdu/qY3AghzGGZjNieuYaWzZn6M2niHQUq8V3bDMigmNblFfqrK4GzM5XmL9QId2VwEs6BGHE5eUaFxaqhFpwHItsNsnCxSqzcxVWayHLK37sFt8xoFKKUBsKhQyZdIJ6PeLI0QWUgsi0kiTXnWRjbxfGCCKCZcH3PyxQq2kyaZdiIRs7k2MAgtaG3nyKx/YUsBScOVfmbGmFrpSDUlCtBpSv+VgKPM+hdK7M6TPLKEuYnCiwqS9FqE0sm4mVJGsDwOSeIvf3ZwkDw+dfzeH7IQJs2JBkU18aI0Kjofn0qzmCsBWLj+0tUq/r2KkSO+qMEZJJmxcODpFIWCxdqfHZl7Oku1yqN5uslH0ymQSffz3LpaVVXMfi+YODpDyHKIofWrEB16o4NppncqIAAsd/ucyJk0t0dyfpyaU4+esVjh1fAoGJRzbzwNjGtqrXFiCAslpm/OyBAfqLGYzA+x9NU/c1kRHe+/A8IrBlS5oXDg7RaMazls4BgShqDa6HDw2TTFjU6pq33i3x5ttnWa2FuI7F4UPDrf+VKN7G6BgQWq1uNDRDgzmeeXoAMcLi0ioXF1cRI+x/aivD2/Ntt7ZjwDVI3w958on72f1AH5E2RJFh53gv+/dtw/c7mwU7BmxJEWnDa6+MsKE7STaT4PXDo0TGdL406/DjrhSE2pDJuLzx2ijGCN3ZZKyB4K4Cwu3vcXAgB0CjsT5wsI5nM0opwjC6db1eWtfDo/UEW9M9fz74P2CnuucB/wAUfWf8hSh1ngAAAABJRU5ErkJggg==" alt="SqualusPro" style="width:36px;height:36px;object-fit:contain;border-radius:6px;"></div><h3>SqualusPro</h3><p>Modelo 65 — NFC-e com CPF na Nota / Nota Fiscal Paranaense integrada.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#6c63ff,#a29bfe44)">📄</div><h3>Sagres NFe</h3><p>Modelo 55 para entrada, saída, importação, exportação e remessa.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#00b894,#55efc444)">📊</div><h3>Sagres Dash</h3><p>Dashboard mobile com gráficos e indicadores de desempenho em tempo real.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#0984e3,#74b9ff44)">📱</div><h3>Sagres Android</h3><p>App integrado ao NFCe para automatizar pedidos via garçom ou totem.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#fdcb6e,#ffeaa744)">🛵</div><h3>Sagres Delivery</h3><p>Controle de entregas, bina integrada, comissões e status em tempo real.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#a29bfe,#d8d4ff44)">📦</div><h3>Sagres Gestão</h3><p>Estoque, conta assinada, fiado, contas a pagar/receber e financeiro completo.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#fd79a8,#fdcfe444)">🏪</div><h3>Sagres Franquia</h3><p>Comunicação e gestão centralizada entre franqueados e franqueadoras.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#00cec9,#81ecec44)">🔗</div><h3>Sagres Integração</h3><p>Sincronização de vendas, preços e dados entre franqueado e franqueador.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#6c63ff,#a29bfe44)">💬</div><h3>Sagres SMS</h3><p>Notificações automáticas confirmando pedidos e avisos de retirada.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#e17055,#fab1a044)">👨‍🍳</div><h3>Sagres Produção</h3><p>Monitor de cozinha para acompanhar montagem e status dos pedidos.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#0984e3,#74b9ff44)">📅</div><h3>Sagres Encomendas</h3><p>Agendamento e controle de encomendas com avisos automáticos.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#00b894,#55efc444)">📈</div><h3>Sagres Relatórios</h3><p>DRE, DRG, plano de contas, financeiros e operacionais em múltiplos formatos.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#fd79a8,#fdcfe444)">🎯</div><h3>Sagres CRM</h3><p>Frequência, consumo e fidelidade — dados para relacionamento próximo.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#fdcb6e,#ffeaa744)">🏆</div><h3>Prog. Fidelidade</h3><p>Pontos acumulados por consumo trocáveis por produtos do cardápio.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#1a6fe8,#45aaff22)">💳</div><h3>Venda Antecipada</h3><p>Clientes compram créditos e consomem posteriormente com débito automático.</p></div>
+    <div class="pc"><div class="pi" style="background:linear-gradient(135deg,#a29bfe,#d8d4ff44)">🖥️</div><h3>Sagres TS</h3><p>Interface touch screen otimizada para operação rápida no balcão.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     7. POR QUE SAGRES?
+════════════════════════════════════════════════════════════ -->
+<section class="s why-section" id="porque">
+  <div class="why-inner">
+    <div>
+      <div class="s-tag">Diferenciais</div>
+      <h2 class="s-title">Por que escolher a Sagres?</h2>
+      <p class="s-sub">Somos mais do que software — somos o parceiro técnico que cuida de tudo para que você foque no seu negócio.</p>
+      <div class="why-feats">
+        <div class="wf"><span class="wf-num">01</span><div><h4>Atendimento Personalizado</h4><p>Moldamos o sistema para as necessidades do seu estabelecimento. Nada de solução genérica.</p></div></div>
+        <div class="wf"><span class="wf-num">02</span><div><h4>Suporte 24/7 com Plantão Emergencial</h4><p>Problemas não escolhem hora. Nossa equipe está disponível todos os dias do ano, incluindo feriados.</p></div></div>
+        <div class="wf"><span class="wf-num">03</span><div><h4>Alinhamento Fiscal Completo</h4><p>NFC-e, NF-e, SEFAZ — trabalhamos em conformidade com toda a legislação vigente.</p></div></div>
+        <div class="wf"><span class="wf-num">04</span><div><h4>Suporte Online em Tempo Real</h4><p>Conexão remota imediata, backups locais e em nuvem, e acompanhamento pós-instalação.</p></div></div>
+        <div class="wf"><span class="wf-num">05</span><div><h4>Sistemas Totalmente Integrados</h4><p>PDV, gestão, delivery, fidelidade, produção — um ecossistema coeso e sem conflitos.</p></div></div>
+      </div>
+    </div>
+    <div class="why-vis">
+      <div class="why-card">
+        <div class="wct">Especialidades e Serviços</div>
+        <div class="chips">
+          <span class="chip">Atendimento Personalizado</span><span class="chip">Treinamentos</span>
+          <span class="chip">Suporte 24/7/365</span><span class="chip">Sistemas Integrados</span>
+          <span class="chip">Backups Local & Nuvem</span><span class="chip">Acesso Remoto</span>
+          <span class="chip">Análise de Demanda</span><span class="chip">Controle de Estoque</span>
+          <span class="chip">Compatível com Mobile</span><span class="chip">Pós-instalação</span>
+          <span class="chip">NFC-e & NF-e</span><span class="chip">Conta Assinada</span>
+        </div>
+        <hr class="wdiv">
+        <div class="wct">Aplicativos Disponíveis</div>
+        <div class="apps-row">
+          <div class="arc"><h5>Sagres Dash</h5><span>Relatórios e gráficos mobile</span><div class="slinks"><a class="sl" href="https://itunes.apple.com/us/app/sagres-dash/id1407831060?mt=8" target="_blank">App Store</a><a class="sl" href="https://play.google.com/store/apps/details?id=br.com.sagresinformatica.sagresreport" target="_blank">Play Store</a></div></div>
+          <div class="arc"><h5>Prato Digital</h5><span>Delivery, fidelidade e mais</span><div class="slinks"><a class="sl" href="https://apps.apple.com/br/app/prato-digital/id1476417358" target="_blank">App Store</a><a class="sl" href="https://play.google.com/store/apps/details?id=br.com.sagresinformatica.prato_digital" target="_blank">Play Store</a></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     8. SOBRE
+════════════════════════════════════════════════════════════ -->
+<section class="s about-section" id="sobre">
+  <div class="about-inner">
+    <div class="aqc">
+      <span class="bq">"</span>
+      <p class="aqt"><strong>Sagres Informática</strong> nasceu diante da necessidade do mercado em ter a <strong>solução completa</strong> integrando serviços, hardware e software. Com isso deixamos os nossos clientes tranquilos com a infra-estrutura de tecnologia da sua empresa.<br><br>Trabalhamos também alinhados com a <strong>legislação fiscal vigente</strong> evitando futuros problemas contábeis para nossos clientes. O suporte é composto por colaboradores treinados e atenciosos que estão sempre prontos para solucionar diversas dúvidas e solicitações dos clientes tornando o atendimento mais rápido e eficiente.<br><br>Se você busca uma empresa sólida, com <strong>20 anos de atividades no mercado Nacional</strong>, venha nos fazer uma visita e teremos o maior prazer em atendê-los.<br><br>E se você, profissional de Tecnologia da Informação, tiver interesse em fazer parte de nossa história, <a href="/cdn-cgi/l/email-protection#25574d655644425740564c4b434a574844514c46440b464a480b4757" style="color:var(--accent2);text-decoration:underline;font-style:normal;font-weight:600;">trabalhe conosco</a> e venha fazer parte de nossa equipe de colaboradores. Envie-nos seu currículo.</p>
+      <div class="ametrics">
+        <div class="ambox"><div class="amval">+20</div><div class="amlbl">Anos no mercado</div></div>
+        <div class="ambox"><div class="amval">+5k</div><div class="amlbl">PDVs instalados</div></div>
+        <div class="ambox"><div class="amval">24/7</div><div class="amlbl">Suporte disponível</div></div>
+        <div class="ambox"><div class="amval">100%</div><div class="amlbl">Foco no cliente</div></div>
+      </div>
+    </div>
+    <div class="atcol">
+      <div class="s-tag">Nossa História</div>
+      <h2 class="s-title">Uma empresa construída por décadas de dedicação</h2>
+      <p class="s-sub">Desde o início, nossa missão é ser o parceiro tecnológico que você pode confiar — com solidez, expertise e um time humano que se importa.</p>
+      <div class="timeline">
+        <div class="ti"><div><h4>Fundação da Sagres</h4><p>Criada em Londrina/PR com o objetivo de oferecer automação comercial completa ao mercado de food service.</p></div></div>
+        <div class="ti"><div><h4>Expansão Nacional</h4><p>Crescimento para mais de 3.000 PDVs instalados em todo o Brasil, atendendo restaurantes, franquias e redes.</p></div></div>
+        <div class="ti"><div><h4>Lançamento do Prato Digital</h4><p>Plataforma completa de delivery, fidelidade e autoatendimento — unindo o físico ao digital.</p></div></div>
+        <div class="ti"><div><h4>Parceria Stone & Sagres Cloud</h4><p>Tornamo-nos Partner Oficial Stone e lançamos o Sagres Cloud para gestão 100% online em tempo real.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     9. DEPOIMENTOS
+════════════════════════════════════════════════════════════ -->
+<section class="s" id="depoimentos" style="background:var(--bg2);border-top:1px solid var(--border);padding:5rem 3rem;">
+  <div style="text-align:center;margin-bottom:2.5rem;">
+    <div class="s-tag" style="justify-content:center;">Depoimentos</div>
+    <h2 class="s-title">O que nossos clientes dizem</h2>
+    <p class="s-sub" style="margin:0 auto;">Histórias reais de quem transformou o negócio com a Sagres.</p>
+  </div>
+
+  <div class="dep-outer">
+    <div class="dep-track" id="depTrack">
+      <div class="dep-card">
+        <div class="dep-stars-top">★★★★★</div>
+        <p class="dep-text">"O suporte da Sagres é incomparável. Qualquer problema que surge, mesmo à meia-noite, eles estão prontos para resolver."</p>
+        <div class="dep-sep"></div>
+        <div class="dep-author">
+          <div class="dep-av">🍕</div>
+          <div>
+            <div class="dep-name">Roberto Almeida</div>
+            <div class="dep-role">Pizzaria Donatello · Londrina/PR</div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars-top">★★★★★</div>
+        <p class="dep-text">"Desde que implantamos o Prato Digital, nossas vendas de delivery cresceram mais de 40%. O programa de fidelidade fidelizou nossos clientes."</p>
+        <div class="dep-sep"></div>
+        <div class="dep-author">
+          <div class="dep-av">🍔</div>
+          <div>
+            <div class="dep-name">Fernanda Costa</div>
+            <div class="dep-role">Dog King · Londrina/PR</div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars-top">★★★★★</div>
+        <p class="dep-text">"A integração fiscal com NFC-e nos deu total tranquilidade. Nunca mais tivemos problemas com a SEFAZ. Sistema sólido."</p>
+        <div class="dep-sep"></div>
+        <div class="dep-author">
+          <div class="dep-av">🥩</div>
+          <div>
+            <div class="dep-name">Marcos Pereira</div>
+            <div class="dep-role">Galpão Nelore · Londrina/PR</div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars-top">★★★★★</div>
+        <p class="dep-text">"Migramos de outro sistema e a transição foi suave. O treinamento foi completo e nossa equipe opera o Sagres com autonomia total."</p>
+        <div class="dep-sep"></div>
+        <div class="dep-author">
+          <div class="dep-av">🍣</div>
+          <div>
+            <div class="dep-name">Camila Tanaka</div>
+            <div class="dep-role">Jin Jin · Londrina/PR</div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars-top">★★★★★</div>
+        <p class="dep-text">"O Sagres Gestão nos deu visibilidade total sobre estoque e financeiro. Antes tínhamos prejuízos que nem identificávamos."</p>
+        <div class="dep-sep"></div>
+        <div class="dep-author">
+          <div class="dep-av">🍻</div>
+          <div>
+            <div class="dep-name">André Lima</div>
+            <div class="dep-role">H2 Chopp · Londrina/PR</div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars-top">★★★★★</div>
+        <p class="dep-text">"Excelente suporte pós-venda e sistema muito estável. A equipe da Sagres sempre nos atende com agilidade e atenção."</p>
+        <div class="dep-sep"></div>
+        <div class="dep-author">
+          <div class="dep-av">🍗</div>
+          <div>
+            <div class="dep-name">Patricia Souza</div>
+            <div class="dep-role">Chimarrão Grill · Londrina/PR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dep-controls">
+    <button class="dep-btn" id="depPrev">‹</button>
+    <div class="dep-dots" id="depDots"></div>
+    <button class="dep-btn" id="depNext">›</button>
+  </div>
+
+  <div class="dep-video-row">
+    <div class="dep-video-box" id="depVideoBox">
+      <iframe
+        id="depYT"
+      src="c:\Users\Pedro\Desktop\Pedro Python\strassvideo.mp4.mp4"
+        title="Depoimento Restaurante Strass — Sagres"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="width:100%;height:100%;border:none;display:block;">
+      </iframe>
+    </div>
+    <div class="dep-video-info">
+      <div class="dep-vbadge">▶ Depoimento em vídeo</div>
+      <div class="dep-vtitle">Veja como o<br><em>Restaurante Strass</em><br>usa a Sagres</div>
+      <p class="dep-vdesc">Em primeira pessoa, a proprietária do Restaurante Strass conta como a Sagres transformou a gestão do estabelecimento — do PDV ao controle financeiro e suporte diário.</p>
+      <div class="dep-vclient">
+        <div class="dep-vclient-av">🍽️</div>
+        <div>
+          <div class="dep-vclient-name">Restaurante Strass</div>
+          <div class="dep-vclient-role">Cliente Sagres · Londrina/PR</div>
+          <div class="dep-vclient-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     10. CONTATO
+════════════════════════════════════════════════════════════ -->
+<section class="s contact-section" id="contato">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+    <div>
+      <div class="s-tag">Fale Conosco</div>
+      <h2 class="s-title">Vamos conversar?</h2>
+      <p class="s-sub">Nossa equipe está pronta para apresentar a melhor solução para o seu estabelecimento. Sem compromisso.</p>
+      <div class="ccards">
+        <div class="cc"><span class="cci">📍</span><div><h4>Endereço</h4><p>Rua João Wyclif, 111 — Sala 208<br>Gleba Fazenda Palhano · Londrina/PR</p></div></div>
+        <div class="cc"><span class="cci">📞</span><div><h4>Telefone Fixo</h4><a href="https://wa.me/554333388099" target="_blank" rel="noopener">43 3338-8099</a></div></div>
+        <div class="cc"><span class="cci">🌙</span><div><h4>Plantão 24h</h4><a href="https://wa.me/554399962360" target="_blank" rel="noopener">43 9 9996-2360</a></div></div>
+        <div class="cc"><span class="cci">📱</span><div><h4>Celular</h4><a href="https://wa.me/554398817368" target="_blank" rel="noopener">43 9 8817-3683</a></div></div>
+        <div class="cc"><span class="cci">💼</span><div><h4>Trabalhe Conosco</h4><a href="/cdn-cgi/l/email-protection#f3819bb38092948196809a9d959c819e92879a9092dd909c9edd9181">Envie seu currículo →</a></div></div>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3668.1!2d-51.1766!3d-23.3315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ecd4a13232de45%3A0xbc7682a9e5b06b65!2sRua+Jo%C3%A3o+Wyclif%2C+111+-+Gleba+Fazenda+Palhano%2C+Londrina+-+PR%2C+86050-450!5e0!3m2!1spt!2sbr!4v1700000000000" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     11. FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="foot-inner">
+    <div class="fbrand">
+      <div class="nav-logo"><img src="data:image/jpeg;base64,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" alt="Logo" style="width:32px;height:32px;border-radius:8px;object-fit:cover;">SAGRES</div>
+      <p>Automação comercial completa para restaurantes, bares, lanchonetes e franquias. Mais de 20 anos transformando negócios com tecnologia e suporte de excelência.</p>
+    </div>
+    <div class="fcol">
+      <h5>Produtos</h5>
+      <a href="#">Sagres NFCe</a>
+      <a href="#">Prato Digital</a>
+      <a href="#">Sagres Delivery</a>
+      <a href="#">Sagres Gestão</a>
+      <a href="#">Sagres Dash</a>
+      <a href="#">Sagres Franquia</a>
+    </div>
+    <div class="fcol">
+      <h5>Empresa</h5>
+      <a href="#sobre">Sobre nós</a>
+      <a href="http://www.pratodigital.com.br" target="_blank">Prato Digital</a>
+      <a href="/cdn-cgi/l/email-protection#2c5e446c5f4d4b5e495f45424a435e414d58454f4d024f4341024e5e">Trabalhe Conosco</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <p>© 2025 Sagres Informática · Londrina/PR · Todos os direitos reservados.</p>
+    <div class="fbl"></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════════ -->
+
+
+<script>
+(function(){
+  const track = document.getElementById('depTrack');
+  const dotsEl = document.getElementById('depDots');
+  const cards  = Array.from(track.querySelectorAll('.dep-card'));
+  let current = 0;
+
+  function perView(){ return window.innerWidth <= 900 ? 1 : 3; }
+  function totalPages(){ return Math.max(1, cards.length - perView() + 1); }
+
+  function buildDots(){
+    dotsEl.innerHTML = '';
+    for(let i=0;i<totalPages();i++){
+      const d = document.createElement('div');
+      d.className = 'dep-dot' + (i===0?' active':'');
+      d.onclick = ()=>goTo(i);
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function goTo(n){
+    const pv = perView();
+    current = Math.max(0, Math.min(n, totalPages()-1));
+    const cardW = cards[0].getBoundingClientRect().width;
+    const gap = 16;
+    track.style.transform = `translateX(-${current*(cardW+gap)}px)`;
+    dotsEl.querySelectorAll('.dep-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
+  }
+
+  document.getElementById('depPrev').onclick = ()=>goTo(current-1);
+  document.getElementById('depNext').onclick = ()=>goTo(current+1);
+
+  buildDots();
+  window.addEventListener('resize', ()=>{ buildDots(); goTo(0); });
+})();
+</script>
+
+
+  <div class="seg-overlay" id="modal-padarias" onclick="closeSeg(event,this)" style="--modal-grad:linear-gradient(135deg,#ff6b35,#f7c59f);--modal-glow:rgba(255,107,53,0.15);--modal-c2:#f7c59f;--modal-ico-bg:#ff6b3522;--modal-ico-border:#ff6b3544;">
+    <div class="seg-modal">
+      <button class="seg-modal-close" onclick="document.getElementById('modal-padarias').classList.remove('open');document.body.style.overflow='';">✕</button>
+      <div class="seg-modal-hero">
+        <div class="seg-modal-eyebrow">Sagres · Padarias</div>
+        <span class="seg-modal-emoji">🥖</span>
+        <h2><em>Padarias</em></h2>
+        <p class="seg-modal-sub">Gestão completa do forno à caixa</p>
+        <p class="seg-modal-desc">Da produção às encomendas, do crédito antecipado à nota fiscal — a Sagres cobre todas as etapas da sua padaria com precisão e simplicidade.</p>
+      </div>
+      <div class="seg-modal-stats">
+        <div class="seg-stat"><div class="seg-stat-val">+20</div><div class="seg-stat-lbl">Anos no mercado</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">+5k</div><div class="seg-stat-lbl">PDVs instalados</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">24/7</div><div class="seg-stat-lbl">Suporte</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">Stone</div><div class="seg-stat-lbl">Partner Oficial</div></div>
+      </div>
+      <div class="seg-modal-feats">
+        <div class="seg-feat"><div class="seg-feat-ico">📦</div><h4>Controle de Produção</h4><p>Acompanhe receitas, rendimento e custo de cada produto. Reduza perdas e maximize o aproveitamento dos insumos.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📅</div><h4>Gestão de Encomendas</h4><p>Registre pedidos antecipados, defina prazos e receba alertas automáticos — nunca mais perca uma encomenda.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">💳</div><h4>Venda Antecipada</h4><p>Clientes carregam crédito e consomem ao longo do tempo com débito automático. Aumenta fidelidade e fluxo de caixa.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🧾</div><h4>NFC-e Integrada</h4><p>Emissor de NF-e modelo 65 totalmente integrado ao PDV, com CPF na nota e conformidade SEFAZ/PR.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📊</div><h4>Relatórios Detalhados</h4><p>DRE, giro de estoque, ranking de produtos mais vendidos e análise de margens em tempo real.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🎯</div><h4>Programa de Fidelidade</h4><p>Pontos acumulados por consumo, trocáveis por produtos do cardápio. Mantenha seus clientes voltando.</p></div>
+      </div>
+      <div class="seg-modal-cta">
+        <p class="seg-cta-title"><em>"Controle total da produção à venda."</em></p>
+        <p class="seg-cta-desc">Fale com um especialista e veja na prática como a Sagres transforma a gestão do seu estabelecimento. Demonstração sem compromisso.</p>
+        <a href="https://wa.me/554333388099?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+demonstra%C3%A7%C3%A3o+para+Padarias" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar Demonstração Grátis
+        </a>
+        <p class="seg-cta-note">Ou ligue: <a href="tel:4333388099">43 3338-8099</a> · Plantão 24h: <a href="https://wa.me/554399962360" target="_blank">43 9 9996-2360</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seg-overlay" id="modal-restaurantes" onclick="closeSeg(event,this)" style="--modal-grad:linear-gradient(135deg,#1a6fe8,#45aaff);--modal-glow:rgba(26,111,232,0.18);--modal-c2:#45aaff;--modal-ico-bg:#1a6fe822;--modal-ico-border:#1a6fe844;">
+    <div class="seg-modal">
+      <button class="seg-modal-close" onclick="document.getElementById('modal-restaurantes').classList.remove('open');document.body.style.overflow='';">✕</button>
+      <div class="seg-modal-hero">
+        <div class="seg-modal-eyebrow">Sagres · Restaurantes</div>
+        <span class="seg-modal-emoji">🍽️</span>
+        <h2><em>Restaurantes</em></h2>
+        <p class="seg-modal-sub">Do pedido à mesa, tudo integrado</p>
+        <p class="seg-modal-desc">PDV poderoso, Alô Garçom, monitor de cozinha e programa de fidelidade — um ecossistema completo para restaurantes de qualquer porte.</p>
+      </div>
+      <div class="seg-modal-stats">
+        <div class="seg-stat"><div class="seg-stat-val">+20</div><div class="seg-stat-lbl">Anos no mercado</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">+5k</div><div class="seg-stat-lbl">PDVs instalados</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">24/7</div><div class="seg-stat-lbl">Suporte</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">Stone</div><div class="seg-stat-lbl">Partner Oficial</div></div>
+      </div>
+      <div class="seg-modal-feats">
+        <div class="seg-feat"><div class="seg-feat-ico">📱</div><h4>Alô Garçom — Comanda Digital</h4><p>Garçons registram pedidos direto no celular. Mesa, produto, observação e envio automático para a cozinha.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">👨‍🍳</div><h4>Monitor de Cozinha</h4><p>Painel para a equipe de preparo acompanhar pedidos em tempo real, reduzindo erros e filas no balcão.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🧾</div><h4>PDV Touch Screen</h4><p>Interface otimizada para operação rápida no caixa — NFC-e, divisão de conta, sangria e turno integrados.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🚀</div><h4>Fura Fila & Totem</h4><p>Clientes fazem o próprio pedido pelo app ou totem. Menos fila, mais giro de mesa.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🎯</div><h4>CRM & Fidelidade</h4><p>Histórico de consumo, frequência e preferências de cada cliente. Campanhas segmentadas por perfil.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📊</div><h4>Gestão Financeira</h4><p>Contas a pagar/receber, estoque, DRE e indicadores de desempenho no Sagres Dash — de qualquer lugar.</p></div>
+      </div>
+      <div class="seg-modal-cta">
+        <p class="seg-cta-title"><em>"Do pedido à mesa, sem nenhum ruído."</em></p>
+        <p class="seg-cta-desc">Fale com um especialista e veja na prática como a Sagres transforma a gestão do seu estabelecimento. Demonstração sem compromisso.</p>
+        <a href="https://wa.me/554333388099?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+demonstra%C3%A7%C3%A3o+para+Restaurantes" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar Demonstração Grátis
+        </a>
+        <p class="seg-cta-note">Ou ligue: <a href="tel:4333388099">43 3338-8099</a> · Plantão 24h: <a href="https://wa.me/554399962360" target="_blank">43 9 9996-2360</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seg-overlay" id="modal-cafeterias" onclick="closeSeg(event,this)" style="--modal-grad:linear-gradient(135deg,#00b894,#55efc4);--modal-glow:rgba(0,184,148,0.15);--modal-c2:#55efc4;--modal-ico-bg:#00b89422;--modal-ico-border:#00b89444;">
+    <div class="seg-modal">
+      <button class="seg-modal-close" onclick="document.getElementById('modal-cafeterias').classList.remove('open');document.body.style.overflow='';">✕</button>
+      <div class="seg-modal-hero">
+        <div class="seg-modal-eyebrow">Sagres · Cafeterias</div>
+        <span class="seg-modal-emoji">☕</span>
+        <h2><em>Cafeterias</em></h2>
+        <p class="seg-modal-sub">Agilidade e experiência para cada xícara</p>
+        <p class="seg-modal-desc">Totem de autoatendimento, fura fila, delivery e CRM — a Sagres transforma cafeterias em operações modernas, ágeis e centradas no cliente.</p>
+      </div>
+      <div class="seg-modal-stats">
+        <div class="seg-stat"><div class="seg-stat-val">+20</div><div class="seg-stat-lbl">Anos no mercado</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">+5k</div><div class="seg-stat-lbl">PDVs instalados</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">24/7</div><div class="seg-stat-lbl">Suporte</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">Stone</div><div class="seg-stat-lbl">Partner Oficial</div></div>
+      </div>
+      <div class="seg-modal-feats">
+        <div class="seg-feat"><div class="seg-feat-ico">🖥️</div><h4>Totem de Autoatendimento</h4><p>Clientes fazem o próprio pedido com autonomia. Reduz filas, libera a equipe e aumenta o ticket médio.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">⚡</div><h4>Fura Fila</h4><p>Pelo app ou site, o cliente pede antes de chegar. Na chegada, é só retirar — sem espera.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🛵</div><h4>Delivery Integrado</h4><p>Controle de entregas, bina telefônica, status em tempo real e comissão de entregadores em uma tela.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🎯</div><h4>CRM Inteligente</h4><p>Conheça seus clientes por frequência e preferência. Envie ofertas personalizadas via SMS e push.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">💳</div><h4>Venda Antecipada</h4><p>Venda cartões de crédito antecipado para clientes frequentes — fluxo de caixa melhorado e fidelização.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📈</div><h4>Relatórios em Tempo Real</h4><p>Sagres Dash no celular: faturamento, produtos mais pedidos e horários de pico de qualquer lugar.</p></div>
+      </div>
+      <div class="seg-modal-cta">
+        <p class="seg-cta-title"><em>"Da primeira xícara ao fechamento, a Sagres cuida da gestão."</em></p>
+        <p class="seg-cta-desc">Fale com um especialista e veja na prática como a Sagres transforma a gestão do seu estabelecimento. Demonstração sem compromisso.</p>
+        <a href="https://wa.me/554333388099?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+demonstra%C3%A7%C3%A3o+para+Cafeterias" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar Demonstração Grátis
+        </a>
+        <p class="seg-cta-note">Ou ligue: <a href="tel:4333388099">43 3338-8099</a> · Plantão 24h: <a href="https://wa.me/554399962360" target="_blank">43 9 9996-2360</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seg-overlay" id="modal-bares" onclick="closeSeg(event,this)" style="--modal-grad:linear-gradient(135deg,#fdcb6e,#ffeaa7);--modal-glow:rgba(253,203,110,0.12);--modal-c2:#ffeaa7;--modal-ico-bg:#fdcb6e22;--modal-ico-border:#fdcb6e44;">
+    <div class="seg-modal">
+      <button class="seg-modal-close" onclick="document.getElementById('modal-bares').classList.remove('open');document.body.style.overflow='';">✕</button>
+      <div class="seg-modal-hero">
+        <div class="seg-modal-eyebrow">Sagres · Bares & Chopperias</div>
+        <span class="seg-modal-emoji">🍺</span>
+        <h2><em>Bares & Chopperias</em></h2>
+        <p class="seg-modal-sub">Controle real para quem serve com prazer</p>
+        <p class="seg-modal-desc">Conta assinada, fiado controlado, estoque de bebidas e relatórios por mesa — a Sagres foi feita para a operação dinâmica dos bares e chopperias.</p>
+      </div>
+      <div class="seg-modal-stats">
+        <div class="seg-stat"><div class="seg-stat-val">+20</div><div class="seg-stat-lbl">Anos no mercado</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">+5k</div><div class="seg-stat-lbl">PDVs instalados</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">24/7</div><div class="seg-stat-lbl">Suporte</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">Stone</div><div class="seg-stat-lbl">Partner Oficial</div></div>
+      </div>
+      <div class="seg-modal-feats">
+        <div class="seg-feat"><div class="seg-feat-ico">✍️</div><h4>Conta Assinada</h4><p>Cliente abre a conta, consome e fecha no final. Comandas digitais, sem perda de item e conferência rápida.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">💸</div><h4>Fiado com Controle</h4><p>Crédito para clientes de confiança com limite definido, histórico e cobrança organizada.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🍺</div><h4>Estoque de Bebidas</h4><p>Controle de barris, garrafas e insumos por lote. Alertas de estoque mínimo para nunca faltar no pico.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📋</div><h4>Relatório por Mesa</h4><p>Veja consumo, ticket médio e tempo de ocupação por mesa. Otimize o giro sem sacrificar a experiência.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📱</div><h4>Comanda Digital</h4><p>Garçons digitam pedidos no celular e o monitor recebe na hora — menos erros, mais velocidade.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🎵</div><h4>Integração com Eventos</h4><p>Controle de consumação mínima e divisão de comissões para noites temáticas e eventos especiais.</p></div>
+      </div>
+      <div class="seg-modal-cta">
+        <p class="seg-cta-title"><em>"Bares que controlam o estoque vendem mais e perdem menos."</em></p>
+        <p class="seg-cta-desc">Fale com um especialista e veja na prática como a Sagres transforma a gestão do seu estabelecimento. Demonstração sem compromisso.</p>
+        <a href="https://wa.me/554333388099?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+demonstra%C3%A7%C3%A3o+para+Bares%20%26%20Chopperias" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar Demonstração Grátis
+        </a>
+        <p class="seg-cta-note">Ou ligue: <a href="tel:4333388099">43 3338-8099</a> · Plantão 24h: <a href="https://wa.me/554399962360" target="_blank">43 9 9996-2360</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seg-overlay" id="modal-franquias" onclick="closeSeg(event,this)" style="--modal-grad:linear-gradient(135deg,#a29bfe,#d8d4ff);--modal-glow:rgba(162,155,254,0.12);--modal-c2:#d8d4ff;--modal-ico-bg:#a29bfe22;--modal-ico-border:#a29bfe44;">
+    <div class="seg-modal">
+      <button class="seg-modal-close" onclick="document.getElementById('modal-franquias').classList.remove('open');document.body.style.overflow='';">✕</button>
+      <div class="seg-modal-hero">
+        <div class="seg-modal-eyebrow">Sagres · Franquias</div>
+        <span class="seg-modal-emoji">🏪</span>
+        <h2><em>Franquias</em></h2>
+        <p class="seg-modal-sub">Gestão centralizada, operação distribuída</p>
+        <p class="seg-modal-desc">Do franqueador ao franqueado, a Sagres sincroniza preços, consolida relatórios e padroniza a operação — sem abrir mão da autonomia de cada unidade.</p>
+      </div>
+      <div class="seg-modal-stats">
+        <div class="seg-stat"><div class="seg-stat-val">+20</div><div class="seg-stat-lbl">Anos no mercado</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">+5k</div><div class="seg-stat-lbl">PDVs instalados</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">24/7</div><div class="seg-stat-lbl">Suporte</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">Stone</div><div class="seg-stat-lbl">Partner Oficial</div></div>
+      </div>
+      <div class="seg-modal-feats">
+        <div class="seg-feat"><div class="seg-feat-ico">🔗</div><h4>Sincronização de Preços</h4><p>Atualize cardápio e preços na franqueadora e propague para todas as unidades em tempo real.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📊</div><h4>DRE Consolidado</h4><p>Visualize o resultado financeiro de todas as unidades em um único painel. Compare e identifique gargalos.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🏪</div><h4>Multi-unidade</h4><p>Cada franqueado opera com autonomia dentro dos limites definidos. A franqueadora mantém controle total.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🧾</div><h4>Fiscal por CNPJ</h4><p>Cada unidade emite sua própria NFC-e/NF-e com CNPJ correto e integração SEFAZ. Conformidade garantida.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🎯</div><h4>Fidelidade em Rede</h4><p>Pontos acumulados em qualquer unidade, resgatáveis em toda a rede.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📱</div><h4>Sagres Dash para a Rede</h4><p>O franqueador acompanha todas as unidades pelo celular com alertas e rankings em tempo real.</p></div>
+      </div>
+      <div class="seg-modal-cta">
+        <p class="seg-cta-title"><em>"Redes que crescem precisam de tecnologia que escale junto."</em></p>
+        <p class="seg-cta-desc">Fale com um especialista e veja na prática como a Sagres transforma a gestão do seu estabelecimento. Demonstração sem compromisso.</p>
+        <a href="https://wa.me/554333388099?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+demonstra%C3%A7%C3%A3o+para+Franquias" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar Demonstração Grátis
+        </a>
+        <p class="seg-cta-note">Ou ligue: <a href="tel:4333388099">43 3338-8099</a> · Plantão 24h: <a href="https://wa.me/554399962360" target="_blank">43 9 9996-2360</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seg-overlay" id="modal-pizzarias" onclick="closeSeg(event,this)" style="--modal-grad:linear-gradient(135deg,#e17055,#fab1a0);--modal-glow:rgba(225,112,85,0.15);--modal-c2:#fab1a0;--modal-ico-bg:#e1705522;--modal-ico-border:#e1705544;">
+    <div class="seg-modal">
+      <button class="seg-modal-close" onclick="document.getElementById('modal-pizzarias').classList.remove('open');document.body.style.overflow='';">✕</button>
+      <div class="seg-modal-hero">
+        <div class="seg-modal-eyebrow">Sagres · Pizzarias</div>
+        <span class="seg-modal-emoji">🍕</span>
+        <h2><em>Pizzarias</em></h2>
+        <p class="seg-modal-sub">Do pedido ao forno, sem complicação</p>
+        <p class="seg-modal-desc">Delivery online, monitor de produção, sabores compostos e programa de fidelidade — a Sagres domina as especificidades das pizzarias como ninguém.</p>
+      </div>
+      <div class="seg-modal-stats">
+        <div class="seg-stat"><div class="seg-stat-val">+20</div><div class="seg-stat-lbl">Anos no mercado</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">+5k</div><div class="seg-stat-lbl">PDVs instalados</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">24/7</div><div class="seg-stat-lbl">Suporte</div></div>
+        <div class="seg-stat"><div class="seg-stat-val">Stone</div><div class="seg-stat-lbl">Partner Oficial</div></div>
+      </div>
+      <div class="seg-modal-feats">
+        <div class="seg-feat"><div class="seg-feat-ico">🌐</div><h4>Cardápio Digital & Delivery</h4><p>Site, app e weblink prontos para receber pedidos. Sabores, bordas, tamanhos com cálculo automático.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🔥</div><h4>Monitor de Produção</h4><p>Fila de pedidos no painel da cozinha com status: aguardando, em preparo, no forno e pronto.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🛵</div><h4>Controle de Entregadores</h4><p>Rota, status, tempo médio e comissão. Clientes recebem notificação do pedido a caminho.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🍕</div><h4>Sabores Compostos</h4><p>Suporte nativo a pizzas meio a meio e múltiplos sabores com cálculo correto de preço e fiscal.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">🎯</div><h4>Fidelidade & Recompensas</h4><p>A cada pizza, pontos. Depois de X pedidos, ganhou uma pizza grátis. Programa configurável.</p></div>
+        <div class="seg-feat"><div class="seg-feat-ico">📦</div><h4>Gestão de Insumos</h4><p>Controle de massa, ingredientes e embalagens. Alertas antes do pico do fim de semana.</p></div>
+      </div>
+      <div class="seg-modal-cta">
+        <p class="seg-cta-title"><em>"Pizzarias que automatizam o pedido vendem mais sem contratar mais."</em></p>
+        <p class="seg-cta-desc">Fale com um especialista e veja na prática como a Sagres transforma a gestão do seu estabelecimento. Demonstração sem compromisso.</p>
+        <a href="https://wa.me/554333388099?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+demonstra%C3%A7%C3%A3o+para+Pizzarias" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar Demonstração Grátis
+        </a>
+        <p class="seg-cta-note">Ou ligue: <a href="tel:4333388099">43 3338-8099</a> · Plantão 24h: <a href="https://wa.me/554399962360" target="_blank">43 9 9996-2360</a></p>
+      </div>
+    </div>
+  </div>
+
+<script>
+function toggleDropdown(e){
+  e.preventDefault();
+  var dd = document.getElementById('navDropdown');
+  dd.classList.toggle('active');
+}
+document.addEventListener('click', function(e){
+  var dd = document.getElementById('navDropdown');
+  if(dd && !dd.contains(e.target)) dd.classList.remove('active');
+});
+function openSeg(id){
+  var el = document.getElementById('modal-'+id);
+  if(!el) return;
+  document.body.style.overflow='hidden';
+  el.classList.add('open');
+  el.scrollTop = 0;
+}
+function closeSeg(e, overlay){
+  if(e && e.target !== e.currentTarget) return;
+  var el = typeof overlay === 'string' ? document.getElementById(overlay) : overlay;
+  if(!el) return;
+  el.classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape'){
+    document.querySelectorAll('.seg-overlay.open').forEach(function(el){
+      el.classList.remove('open');
+      document.body.style.overflow='';
+    });
+  }
+});
+</script>
+
+</body>
+</html>
